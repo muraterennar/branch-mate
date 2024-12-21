@@ -1,59 +1,38 @@
-# BranchMate
+<p align="center"><img src="https://socialify.git.ci/muraterennar/branch-mate/image?issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Circuit+Board&amp;pulls=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.0.0.
+<h2>🚀 Demo</h2>
 
-## Development server
+[https://branch-mate.vercel.app/](https://branch-mate.vercel.app/)
 
-To start a local development server, run:
+<h2>🛠️ Installation Steps:</h2>
 
-```bash
-ng serve
+<p>1. Project Install</p>
+
+```
+https://github.com/muraterennar/branch-mate.git
 ```
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+<p>2. Libraries Install</p>
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
+```
+npm install
 ```
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+<p>3. Project Start</p>
 
-```bash
-ng generate --help
+```
+npm run start
 ```
 
-## Building
 
-To build the project run:
 
-```bash
-ng build
-```
+<h2>💻 Built with</h2>
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Technologies used in the project:
 
-## Running unit tests
+*   Angular 19
+*   Tailwindcss
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+<h2>🛡️ License:</h2>
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+This project is licensed under the MIT license. See the full license at [MIT License](https://github.com/muraterennar/branch-mate/blob/prod/LICENSE).
