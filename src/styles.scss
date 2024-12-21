@@ -1,1 +1,27 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.custom-input {
+  @apply px-4 py-2 w-full border rounded bg-background text-dark-surface border-primary outline-none focus:outline-primary focus:border-transparent dark:text-white dark:border-dark-secondary dark:bg-dark-surface dark:focus:border-transparent dark:focus:outline-dark-secondary duration-200;
+}
+
+.source-code-pro-style {
+  font-family: "Source Code Pro", serif;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
