@@ -35,4 +35,4 @@ Technologies used in the project:
 
 <h2>🛡️ License:</h2>
 
-This project is licensed under the MIT license. See the full license at [MIT License](https://github.com/muraterennar/branch-mate/blob/prod/LICENSE).
+This project is licensed under the MIT License - see the [LICENSE](https://github.com/muraterennar/branch-mate/blob/prod/LICENSE)
