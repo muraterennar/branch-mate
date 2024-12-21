@@ -79,7 +79,7 @@ export class AppComponent implements OnInit {
     if (this.form.valid) {
       this.branchData = this.form.value as BranchData;
       this.branchNameValue = this.branchData?.branchType?.toLowerCase() + '/iss-' + this.branchData?.issueCode?.toString()?.toLowerCase() + '-' + this.branchData?.branchName?.toLowerCase().replaceSpacesWithDash();
-      this.commitMessageValue = this.branchData?.username?.toLowerCase()?.replaceSpacesWithDash() + '/' + this.branchData?.repositoryName?.toLowerCase()?.replaceSpacesWithDash() + '#' + this.branchData?.issueCode?.toString()?.toLowerCase() + ' | ' + this.branchData?.commitMessage?.toLowerCase()?.replaceSpacesWithDash();
+      this.commitMessageValue = this.branchData?.username?.toLowerCase()?.replaceSpacesWithDash() + '/' + this.branchData?.repositoryName?.toLowerCase()?.replaceSpacesWithDash() + '#' + this.branchData?.issueCode?.toString()?.toLowerCase() + '|' + this.branchData?.commitMessage?.toLowerCase()?.replaceSpacesWithDash();
       this.prTitle = 'ISS #' + this.branchData?.issueCode?.toString()?.toLowerCase() + ' | PR';
     }
   }
