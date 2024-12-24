@@ -1,4 +1,14 @@
-<div class="flex flex-col justify-center items-center gap-6 p-4 min-h-screen bg-transparent overscroll-hidden relative">
+<div class="flex flex-col justify-center items-center gap-6 p-4 bg-transparent overscroll-hidden relative">
+
+  <div class="flex justify-end items-center gap-4 mb-8 w-full z-40">
+    <span class="source-code-pro-style text-gray-300/90 dark:text-gray-300/40"><b>v{{version}}</b></span>
+    <button type="button"
+            class=" px-3.5 py-2.5 border border-dark-primary dark:border-background rounded-full"
+            (click)="toggleTheme()">
+      <i [class]="darkModeIcon + ' text-2xl text-dark-primary dark:text-background'"></i>
+    </button>
+  </div>
+
   <div class="absolute top-0 left-0 w-full min-h-screen flex justify-center items-center z-0 overflow-hidden">
     <h1 class="source-code-pro-style text-gray-300/40 dark:text-gray-300/10 text-[500px]">Branch</h1>
   </div>
@@ -6,12 +16,6 @@
   <!-- Formu doğru şekilde formGroup ile ilişkilendirin -->
   <form [formGroup]="form" class="flex flex-col justify-start items-start w-8/12 mx-auto gap-6 z-40"
         (ngSubmit)="submitForm()">
-
-    <button type="button"
-            class="absolute top-4 right-4 px-3.5 py-2.5 border border-dark-primary dark:border-background rounded-full"
-            (click)="toggleTheme()">
-      <i [class]="darkModeIcon + ' text-2xl text-dark-primary dark:text-background'"></i>
-    </button>
 
     <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
       <span class="w-auto col-span-12 md:col-span-3 text-dark-primary dark:text-white">Username:</span>

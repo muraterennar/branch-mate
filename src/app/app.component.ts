@@ -7,6 +7,7 @@ import {CommonModule} from '@angular/common';
 import {CustomButtonTypes} from './core/components/custom-button/custom-button-types';
 import {Icons} from './core/constants/icons';
 import {BranchData} from './core/models/branch-data';
+import {environment} from '../environments/environment';
 
 @Component({
   selector: 'app-root',
@@ -26,6 +27,7 @@ export class AppComponent implements OnInit {
   branchNameValue: string = '';
   commitMessageValue: string = '';
   prTitle: string = '';
+  version: string = environment?.version;
 
   constructor(private themeService: ThemeService, private formBuilder: FormBuilder) {
     this.createForm();
