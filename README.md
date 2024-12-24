@@ -1,4 +1,4 @@
-<p align="center"><img src="https://socialify.git.ci/muraterennar/branch-mate/image?issues=1&amp;language=1&amp;name=1&amp;owner=1&amp;pattern=Circuit+Board&amp;pulls=1&amp;stargazers=1&amp;theme=Light" alt="project-image"></p>
+![branch-mate](https://socialify.git.ci/muraterennar/branch-mate/image?language=1&name=1&owner=1&theme=Light)
 
 <h2>🚀 Demo</h2>
 
