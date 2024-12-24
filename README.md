@@ -9,7 +9,7 @@
 <p>1. Project Install</p>
 
 ```
-https://github.com/muraterennar/branch-mate.git
+git clone https://github.com/muraterennar/branch-mate.git
 ```
 
 <p>2. Libraries Install</p>
