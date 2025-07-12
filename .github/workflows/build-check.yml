@@ -30,10 +30,18 @@ jobs:
           echo "Checking Angular CLI version..."
           npx ng version
 
+      - name: ⚙️ Run prebuild script
+        run: |
+          echo "Running prebuild script..."
+          npm run prebuild
+          echo "Logging changes after prebuild:"
+          git status
+          git diff --stat
+
       - name: 🏗️ Build Angular project
         run: |
           echo "Building Angular project for production..."
-          npm run build --if-present || npx ng build --configuration production
+          npm run build
 
       - name: ✅ Verify build output
         run: |

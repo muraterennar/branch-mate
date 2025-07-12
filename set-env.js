@@ -1,6 +1,8 @@
 const fs = require("fs");
 
-const targetPath = "./src/environments/environment.production.ts";
+const targetPathProduction = "./src/environments/environment.production.ts";
+const targetPath = process.env.NODE_ENV === "production" ? targetPathProduction : "./src/environments/environment.ts";
+
 const apiUrl = process.env.API_BASE_URL || "";
 
 const envConfigFile = `
