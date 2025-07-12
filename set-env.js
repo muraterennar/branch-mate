@@ -6,8 +6,8 @@ const apiUrl = process.env.API_BASE_URL || "";
 const envConfigFile = `
 export const environment = {
   production: true,
-  version: ${process.env.VERSION || "1.0.2"},
-  API_BASE_URL: ${apiUrl}
+  version: '${process.env.VERSION || "1.0.2"}',
+  API_BASE_URL: '${apiUrl}'
 };
 `;
 
