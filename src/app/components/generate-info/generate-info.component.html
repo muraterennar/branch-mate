@@ -1,0 +1,297 @@
+<!-- Modern Form Container -->
+<div class="w-full max-w-4xl mx-auto px-4">
+    <!-- Header Section -->
+    <div class="text-center mb-12">
+        <h1 class="source-code-pro-style text-4xl font-bold text-dark-primary dark:text-white mb-4">
+            Git Branch Generator
+        </h1>
+        <p class="text-lg text-gray-600 dark:text-gray-300">
+            Generate standardized branch names, commit messages, and PR titles
+        </p>
+    </div>
+
+    <!-- Form Card -->
+    <div
+        class="bg-surface dark:bg-dark-surface rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8 backdrop-blur-sm">
+        <form [formGroup]="form" class="space-y-6" (ngSubmit)="submitForm()">
+
+            <!-- Grid Layout for Form Fields -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+                <!-- Username Field -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="ri-user-line mr-2"></i>
+                        Username
+                    </label>
+                    <div class="relative">
+                        <input type="text" class="form-input peer" [ngClass]="getFieldErrorClass('username')"
+                            formControlName="username" placeholder="Enter GitHub username"
+                            (input)="onUsernameInput($event)" />
+                        <div class="form-input-border"></div>
+                    </div>
+                    @if (form.get('username')?.invalid && (form.get('username')?.dirty || isSubmitted)) {
+                    <div class="form-error">
+                        <i class="ri-error-warning-line mr-1"></i>
+                        Username is required (min 3 characters)
+                    </div>
+                    }
+                </div>
+
+                <!-- Repository Name Field -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="ri-git-repository-line mr-2"></i>
+                        Repository Name
+                    </label>
+                    <div class="relative">
+                        <input type="text" class="form-input peer" [ngClass]="getFieldErrorClass('repositoryName')"
+                            list="repositories" formControlName="repositoryName"
+                            placeholder="Select or type repository name" (focus)="showRepoSuggestions = true"
+                            (blur)="hideRepoSuggestions()" />
+                        <div class="form-input-border"></div>
+
+                        <!-- Loading Spinner -->
+                        @if (loadingRepos) {
+                        <div class="absolute right-3 top-1/2 transform -translate-y-1/2">
+                            <i class="ri-loader-4-line animate-spin text-primary dark:text-dark-primary"></i>
+                        </div>
+                        }
+
+                        <!-- Custom Dropdown -->
+                        @if (showRepoSuggestions && repos && repos.length > 0) {
+                        <div class="dropdown-container">
+                            @for (repo of repos; track repo.id) {
+                            <div class="dropdown-item" (mousedown)="selectRepository(repo.name)">
+                                <div class="flex items-center space-x-3">
+                                    <i class="ri-git-repository-line text-primary dark:text-dark-primary"></i>
+                                    <div>
+                                        <div class="font-medium text-gray-900 dark:text-white">{{ repo.name }}</div>
+                                        <div class="text-xs text-gray-500 dark:text-gray-400 truncate">
+                                            {{ repo.description || 'No description available' }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            }
+                        </div>
+                        }
+
+                        <!-- Fallback Datalist -->
+                        <datalist id="repositories">
+                            @for (repo of repos; track repo.id) {
+                            <option [value]="repo.name">{{ repo.name }}</option>
+                            }
+                        </datalist>
+                    </div>
+                    @if (form.get('repositoryName')?.invalid && (form.get('repositoryName')?.dirty || isSubmitted)) {
+                    <div class="form-error">
+                        <i class="ri-error-warning-line mr-1"></i>
+                        Repository name is required (min 3 characters)
+                    </div>
+                    }
+                </div>
+
+                <!-- Branch Type Field -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="ri-git-branch-line mr-2"></i>
+                        Branch Type
+                    </label>
+                    <div class="relative">
+                        <select class="form-select peer" [ngClass]="getFieldErrorClass('branchType')"
+                            formControlName="branchType">
+                            <option value="" disabled>Choose branch type</option>
+                            @for (branch of branchTypes; track branch.id) {
+                            <option [value]="branch.name">
+                                {{ branch.name }}
+                            </option>
+                            }
+                        </select>
+                        <div class="form-input-border"></div>
+                    </div>
+                    @if (form.get('branchType')?.invalid && (form.get('branchType')?.dirty || isSubmitted)) {
+                    <div class="form-error">
+                        <i class="ri-error-warning-line mr-1"></i>
+                        Please select a branch type
+                    </div>
+                    }
+                </div>
+
+                <!-- Issue Code Field -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="ri-hashtag mr-2"></i>
+                        Issue Code
+                        <span class="text-xs text-gray-500 dark:text-gray-400 ml-2">(Optional)</span>
+                    </label>
+                    <div class="relative">
+                        <input type="number" class="form-input peer" formControlName="issueCode"
+                            placeholder="e.g., 123" />
+                        <div class="form-input-border"></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Full Width Fields -->
+            <div class="space-y-6">
+
+                <!-- Branch Name Field -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="ri-code-s-slash-line mr-2"></i>
+                        Branch Name
+                    </label>
+                    <div class="relative">
+                        <input type="text" class="form-input peer" [ngClass]="getFieldErrorClass('branchName')"
+                            formControlName="branchName" placeholder="e.g., user authentication system" />
+                        <div class="form-input-border"></div>
+                    </div>
+                    @if (form.get('branchName')?.invalid && (form.get('branchName')?.dirty || isSubmitted)) {
+                    <div class="form-error">
+                        <i class="ri-error-warning-line mr-1"></i>
+                        Branch name is required (min 3 characters)
+                    </div>
+                    }
+                </div>
+
+                <!-- Commit Message Field -->
+                <div class="form-group">
+                    <label class="form-label">
+                        <i class="ri-message-2-line mr-2"></i>
+                        Commit Message
+                    </label>
+                    <div class="relative">
+                        <textarea class="form-textarea peer" [ngClass]="getFieldErrorClass('commitMessage')"
+                            formControlName="commitMessage" placeholder="Describe what this commit does..."
+                            rows="3"></textarea>
+                        <div class="form-input-border"></div>
+                    </div>
+                    <div class="flex justify-between items-center mt-1">
+                        @if (form.get('commitMessage')?.invalid && (form.get('commitMessage')?.dirty || isSubmitted)) {
+                        <div class="form-error">
+                            <i class="ri-error-warning-line mr-1"></i>
+                            Commit message is required (3-250 characters)
+                        </div>
+                        }
+                        <div class="text-xs text-gray-500 dark:text-gray-400 ml-auto">
+                            {{ commitMessage?.value?.length || 0 }}/250
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- Submit Button -->
+            <div class="flex justify-center pt-6">
+                <button type="submit" [disabled]="form.invalid" class="generate-button group">
+                    <span class="flex items-center space-x-2">
+                        <i class="ri-magic-line text-xl"></i>
+                        <span class="font-semibold">Generate Git Commands</span>
+                    </span>
+                    <div class="button-shine"></div>
+                </button>
+            </div>
+
+        </form>
+    </div>
+
+    <!-- Results Section -->
+    @if (form?.valid && isSubmitted) {
+    <div class="results-section mt-12 space-y-6">
+        <div class="text-center mb-8">
+            <h2 class="source-code-pro-style text-2xl font-bold text-dark-primary dark:text-white mb-2">
+                Generated Commands
+            </h2>
+            <p class="text-gray-600 dark:text-gray-300">
+                Copy and use these standardized Git commands
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+            <!-- Branch Name Result -->
+            <div class="result-card">
+                <div class="result-header">
+                    <i class="ri-git-branch-line text-2xl"></i>
+                    <h3 class="font-semibold">Branch Name</h3>
+                </div>
+                <div class="result-content">
+                    <code class="result-code">{{ branchNameValue }}</code>
+                    <button (click)="copyWithEffect(branchNameValue, 'branchName')" class="copy-button"
+                        [class.copied]="copiedStates['branchName']" title="Copy to clipboard">
+                        <i class="ri-file-copy-line" *ngIf="!copiedStates['branchName']"></i>
+                        <i class="ri-check-line" *ngIf="copiedStates['branchName']"></i>
+                        <span class="copy-tooltip" *ngIf="copiedStates['branchName']">Copied!</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Commit Message Result -->
+            <div class="result-card">
+                <div class="result-header">
+                    <i class="ri-message-2-line text-2xl"></i>
+                    <h3 class="font-semibold">Commit Message</h3>
+                </div>
+                <div class="result-content">
+                    <code class="result-code">{{ commitMessageValue }}</code>
+                    <button (click)="copyWithEffect(commitMessageValue, 'commitMessage')" class="copy-button"
+                        [class.copied]="copiedStates['commitMessage']" title="Copy to clipboard">
+                        <i class="ri-file-copy-line" *ngIf="!copiedStates['commitMessage']"></i>
+                        <i class="ri-check-line" *ngIf="copiedStates['commitMessage']"></i>
+                        <span class="copy-tooltip" *ngIf="copiedStates['commitMessage']">Copied!</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- PR Title Result -->
+            <div class="result-card">
+                <div class="result-header">
+                    <i class="ri-git-pull-request-line text-2xl"></i>
+                    <h3 class="font-semibold">PR Title</h3>
+                </div>
+                <div class="result-content">
+                    <code class="result-code">{{ prTitle }}</code>
+                    <button (click)="copyWithEffect(prTitle, 'prTitle')" class="copy-button"
+                        [class.copied]="copiedStates['prTitle']" title="Copy to clipboard">
+                        <i class="ri-file-copy-line" *ngIf="!copiedStates['prTitle']"></i>
+                        <i class="ri-check-line" *ngIf="copiedStates['prTitle']"></i>
+                        <span class="copy-tooltip" *ngIf="copiedStates['prTitle']">Copied!</span>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Command Examples -->
+        <div class="bg-surface dark:bg-dark-surface rounded-xl border border-gray-200 dark:border-gray-700 p-6 mt-8">
+            <h3
+                class="source-code-pro-style text-lg font-semibold text-dark-primary dark:text-white mb-4 flex items-center">
+                <i class="ri-terminal-line mr-2"></i>
+                Git Commands
+            </h3>
+            <div class="space-y-3">
+                <div class="command-example">
+                    <span class="command-label">Create Branch:</span>
+                    <code class="command-code">git checkout -b {{ branchNameValue }}</code>
+                    <button (click)="copyWithEffect('git checkout -b ' + branchNameValue, 'createBranch')"
+                        class="copy-button-small" [class.copied]="copiedStates['createBranch']">
+                        <i class="ri-file-copy-line" *ngIf="!copiedStates['createBranch']"></i>
+                        <i class="ri-check-line" *ngIf="copiedStates['createBranch']"></i>
+                    </button>
+                </div>
+                <div class="command-example">
+                    <span class="command-label">Commit Changes:</span>
+                    <code class="command-code">git commit -m "{{ commitMessageValue }}"</code>
+                    <button (click)="copyCommitCommand()" class="copy-button-small"
+                        [class.copied]="copiedStates['commitCommand']">
+                        <i class="ri-file-copy-line" *ngIf="!copiedStates['commitCommand']"></i>
+                        <i class="ri-check-line" *ngIf="copiedStates['commitCommand']"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    }
+</div>

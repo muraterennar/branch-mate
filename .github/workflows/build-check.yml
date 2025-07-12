@@ -1,0 +1,69 @@
+name: Build Check
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: ["**"]
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📥 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: 🔧 Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+          cache: "npm"
+
+      - name: 📦 Install dependencies
+        run: |
+          echo "Installing project dependencies..."
+          npm ci
+
+      - name: 🔍 Check Angular CLI
+        run: |
+          echo "Checking Angular CLI version..."
+          npx ng version
+
+      - name: 🏗️ Build Angular project
+        run: |
+          echo "Building Angular project for production..."
+          npm run build --if-present || npx ng build --configuration production
+
+      - name: ✅ Verify build output
+        run: |
+          if [ -d "dist" ] || [ -d "docs" ]; then
+            echo "🎉 Build completed successfully!"
+            echo "� Build output directory:"
+            ls -la dist/ 2>/dev/null || ls -la docs/ 2>/dev/null || echo "No standard build directory found"
+            echo "📊 Build size:"
+            du -sh dist/ 2>/dev/null || du -sh docs/ 2>/dev/null || echo "Size calculation not available"
+            echo "✅ Project builds without errors!"
+          else
+            echo "❌ Build output directory not found!"
+            echo "🔍 Available directories:"
+            ls -la
+            exit 1
+          fi
+
+      - name: 📋 Build summary
+        if: always()
+        run: |
+          echo "===================="
+          echo "� BUILD SUMMARY"
+          echo "===================="
+          echo "Repository: ${{ github.repository }}"
+          echo "Branch: ${{ github.ref_name }}"
+          echo "Commit: ${{ github.sha }}"
+          echo "Node.js version: $(node --version)"
+          echo "npm version: $(npm --version)"
+          if [ "${{ job.status }}" == "success" ]; then
+            echo "Status: ✅ SUCCESS - Project builds correctly!"
+          else
+            echo "Status: ❌ FAILED - Build has issues!"
+          fi
