@@ -1,151 +1,22 @@
 <div class="flex flex-col justify-center items-center gap-6 p-4 bg-transparent overscroll-hidden relative">
-
   <div class="flex justify-end items-center gap-4 mb-8 w-full z-40">
-    <span class="source-code-pro-style text-gray-300/90 dark:text-gray-300/40"><b>v{{version}}</b></span>
-    <button type="button"
-            class=" px-3.5 py-2.5 border border-dark-primary dark:border-background rounded-full"
-            (click)="toggleTheme()">
-      <i [class]="darkModeIcon + ' text-2xl text-dark-primary dark:text-background'"></i>
+    <span class="source-code-pro-style text-gray-300/90 dark:text-gray-300/40"><b>v{{ version }}</b></span>
+    <button type="button" class="px-3.5 py-2.5 border border-dark-primary dark:border-background rounded-full"
+      (click)="toggleTheme()">
+      <i [class]="
+          darkModeIcon + ' text-2xl text-dark-primary dark:text-background'
+        "></i>
     </button>
   </div>
 
   <div class="absolute top-0 left-0 w-full min-h-screen flex justify-center items-center z-0 overflow-hidden">
-    <h1 class="source-code-pro-style text-gray-300/40 dark:text-gray-300/10 text-[500px]">Branch</h1>
+    <h1 class="source-code-pro-style text-gray-300/40 dark:text-gray-300/10 text-[500px]">
+      Branch
+    </h1>
   </div>
 
-  <!-- Formu doğru şekilde formGroup ile ilişkilendirin -->
-  <form [formGroup]="form" class="flex flex-col justify-start items-start w-8/12 mx-auto gap-6 z-40"
-        (ngSubmit)="submitForm()">
+  <div class="w-full z-50">
+    <router-outlet></router-outlet>
+  </div>
 
-    <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-      <span class="w-auto col-span-12 md:col-span-3 text-dark-primary dark:text-white">Username:</span>
-      <div class="col-span-12 md:col-span-9">
-        <input type="text" class="custom-input"
-               [ngClass]="form.get('username').invalid && (form.get('username').dirty || isSubmitted) ?'!border-transparent !outline-error focus:outline-error dark:border-error dark:outline-error' : ''"
-               formControlName="username" placeholder="Username"/>
-        <!-- Hata mesajını göstermek için ngIf kullan -->
-        @if (form.get('username').invalid && (form.get('username').dirty || isSubmitted)) {
-          <p class="text-error dark:text-dark-error mt-2 text-xs capitalize">User Name is required and min length
-            3
-            characters</p>
-        }
-      </div>
-    </div>
-
-    <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-      <span class="w-auto col-span-12 md:col-span-3 text-dark-primary dark:text-white">Repository Name:</span>
-      <div class="col-span-12 md:col-span-9">
-        <input type="text" class="custom-input"
-               [ngClass]="form.get('repositoryName').invalid && (form.get('repositoryName').dirty || isSubmitted) ?'!border-transparent !outline-error focus:outline-error dark:border-error dark:outline-error' : ''"
-               formControlName="repositoryName" placeholder="Repository Name"/>
-        <!-- Hata mesajını göstermek için ngIf kullan -->
-        @if (form.get('repositoryName').invalid && (form.get('repositoryName').dirty || isSubmitted)) {
-          <p class="text-error dark:text-dark-error mt-2 text-xs capitalize">Repository Name is required and min length
-            3
-            characters</p>
-        }
-      </div>
-    </div>
-
-    <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-      <span class="col-span-12 md:col-span-3 text-dark-primary dark:text-white">Branch Type:</span>
-      <div class="col-span-12 md:col-span-9">
-        <select class="custom-input"
-                [ngClass]="form.get('branchType').invalid && (form.get('branchType').dirty || isSubmitted) ?'!border-transparent !outline-error focus:outline-error dark:border-error dark:outline-error' : ''"
-                formControlName="branchType">
-          <option value="" selected disabled>Select Branch</option>
-          @for (branch of branchTypes; track branch.id) {
-            <option [value]="branch.name">{{ branch.name }}</option>
-          }
-        </select>
-        @if (form.get('branchType').invalid && (form.get('branchType').dirty || isSubmitted)) {
-          <p class="text-error dark:text-dark-error mt-2 text-xs capitalize">Branch Type is required and min length
-            3</p>
-        }
-      </div>
-    </div>
-
-    <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-      <span class="w-auto col-span-12 md:col-span-3 text-dark-primary dark:text-white">Issue Code:</span>
-      <div class="col-span-12 md:col-span-9">
-        <input type="number" class="custom-input"
-               [ngClass]="form.get('issueCode').invalid && (form.get('issueCode').dirty || isSubmitted) ?'!border-transparent !outline-error focus:outline-error dark:border-error dark:outline-error' : ''"
-               formControlName="issueCode" placeholder="Issue Code"/>
-        <!-- Hata mesajını göstermek için ngIf kullan -->
-        @if (form.get('issueCode').invalid && (form.get('issueCode').dirty || isSubmitted)) {
-          <p class="text-error dark:text-dark-error mt-2 text-xs capitalize">Issue Code is required and min length 3
-            characters</p>
-        }
-      </div>
-    </div>
-
-    <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-      <span class="col-span-12 md:col-span-3 text-dark-primary dark:text-white">Branch Name:</span>
-      <div class="col-span-12 md:col-span-9">
-        <input type="text" class="custom-input"
-               [ngClass]="form.get('branchName').invalid && (form.get('branchName').dirty || isSubmitted) ?'!border-transparent !outline-error focus:outline-error dark:border-error dark:outline-error' : ''"
-               formControlName="branchName" placeholder="Branch Name"/>
-        <!-- Hata mesajını göstermek için ngIf kullan -->
-        @if (form.get('branchName').invalid && (form.get('branchName').dirty || isSubmitted)) {
-          <p class="text-error dark:text-dark-error mt-2 text-xs capitalize">Branch Name is required and min length
-            3</p>
-        }
-      </div>
-    </div>
-
-    <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-      <span class="w-auto col-span-12 md:col-span-3 text-dark-primary dark:text-white">Commit Message:</span>
-      <div class="col-span-12 md:col-span-9">
-        <input type="text" class="custom-input"
-               [ngClass]="form.get('commitMessage').invalid && (form.get('commitMessage').dirty || isSubmitted) ?'!border-transparent !outline-error focus:outline-error dark:border-error dark:outline-error' : ''"
-               formControlName="commitMessage" placeholder="Commit Message"/>
-        <!-- Hata mesajını göstermek için ngIf kullan -->
-        @if (form.get('commitMessage').invalid && (form.get('commitMessage').dirty || isSubmitted)) {
-          <p class="text-error dark:text-dark-error mt-2 text-xs capitalize">Commit Message is required and min length 3
-            characters</p>
-        }
-      </div>
-    </div>
-
-    <div class="w-full flex justify-start items-center">
-      <app-custom-button [type]="customButtonTypes?.submit" [disabled]="form.invalid"
-                         [text]="'Generate'"></app-custom-button>
-    </div>
-  </form>
-
-  @if (form?.valid && isSubmitted) {
-    <div
-      class="text-dark-background p-3 rounded dark:text-background z-40 flex flex-col justify-start items-center gap-4 mt-6 w-8/12">
-      <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-        <span class="w-auto col-span-12 md:col-span-3 text-dark-primary dark:text-white text-lg">Branch Name:</span>
-        <div class="col-span-12 md:col-span-9 flex justify-start items-center gap-2">
-          <p class="text-dark-primary dark:text-white text-lg">{{ branchNameValue }}</p>
-          <button (click)="copyToClipboard(branchNameValue)"
-                  class=" bg-primary text-white dark:bg-white dark:text-dark-primary rounded hover:bg-primary-dark">
-            <i class="ri-file-copy-line"></i>
-          </button>
-        </div>
-      </div>
-      <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-        <span class="w-auto col-span-12 md:col-span-3 text-dark-primary dark:text-white text-lg">Commit Message:</span>
-        <div class="col-span-12 md:col-span-9 flex justify-start items-center gap-2">
-          <p class="text-dark-primary dark:text-white text-lg">{{ commitMessageValue }}</p>
-          <button (click)="copyToClipboard(commitMessageValue)"
-                  class=" bg-primary text-white dark:bg-white dark:text-dark-primary rounded hover:bg-primary-dark">
-            <i class="ri-file-copy-line"></i>
-          </button>
-        </div>
-      </div>
-      <div class="grid grid-cols-12 justify-start items-start gap-3 w-full">
-        <span class="w-auto col-span-12 md:col-span-3 text-dark-primary dark:text-white text-lg">PR Title:</span>
-        <div class="col-span-12 md:col-span-9 flex justify-start items-center gap-2">
-          <p class="text-dark-primary dark:text-white text-lg">{{ prTitle }}</p>
-          <button (click)="copyToClipboard(prTitle)"
-                  class=" bg-primary text-white dark:bg-white dark:text-dark-primary rounded hover:bg-primary-dark">
-            <i class="ri-file-copy-line"></i>
-          </button>
-        </div>
-      </div>
-    </div>
-  }
 </div>
