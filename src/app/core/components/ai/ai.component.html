@@ -1,0 +1,35 @@
+<button type="button"
+    class="flex items-center space-x-2 text-primary dark:text-dark-primary hover:bg-gray-100 dark:hover:bg-gray-800 rounded-lg px-3 py-2 transition-all duration-300 text-sm font-medium border border-gray-200 dark:border-gray-700 hover:border-primary dark:hover:border-dark-primary hover:shadow-md transform hover:scale-105"
+    [ngClass]="{
+        'animate-pulse loading': isLoading,
+        'bg-primary/10': isLoading,
+        'dark:bg-dark-primary/10': isLoading
+    }"
+    (click)="generateWithAI()" 
+    [disabled]="isLoading"
+    [attr.aria-label]="'Generate ' + (fieldType === 'branch' ? 'branch name' : 'commit message') + ' with AI'">
+    
+    <div class="relative ai-icon" [class.animate-bounce]="isLoading">
+        <i class="ri-quill-pen-ai-line text-lg transition-transform duration-300" 
+           [ngClass]="{
+               'scale-110': isLoading,
+               'text-primary': isLoading,
+               'dark:text-dark-primary': isLoading
+           }"
+           *ngIf="!isLoading"></i>
+        
+        <div class="relative" *ngIf="isLoading">
+            <i class="ri-loader-4-line animate-spin text-lg text-primary dark:text-dark-primary"></i>
+            <div class="absolute inset-0 rounded-full bg-primary/20 dark:bg-dark-primary/20 animate-ping"></div>
+        </div>
+    </div>
+    
+    <span class="transition-all duration-300" 
+          [ngClass]="{
+              'font-semibold': isLoading,
+              'text-primary': isLoading,
+              'dark:text-dark-primary': isLoading
+          }">
+        {{ isLoading ? 'Generating...' : 'AI Generate' }}
+    </span>
+</button>

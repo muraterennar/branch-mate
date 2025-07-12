@@ -1,0 +1,278 @@
+// Form Background Glow Effects
+.form-glow {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(60px);
+  opacity: 0.4;
+  animation: glow-drift 15s infinite ease-in-out;
+  
+  &.glow-1 {
+    width: 200px;
+    height: 200px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.2) 0%, transparent 70%);
+    top: 10%;
+    left: -5%;
+    animation-delay: 0s;
+  }
+  
+  &.glow-2 {
+    width: 300px;
+    height: 300px;
+    background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+    top: 50%;
+    right: -10%;
+    animation-delay: -5s;
+  }
+  
+  &.glow-3 {
+    width: 150px;
+    height: 150px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.2) 0%, transparent 70%);
+    bottom: 20%;
+    left: 20%;
+    animation-delay: -10s;
+  }
+}
+
+// Enhanced Form Inputs
+.form-input, .form-textarea, .form-select {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:focus {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 20px rgba(59, 130, 246, 0.15);
+  }
+  
+  &:hover {
+    transform: translateY(-0.5px);
+  }
+}
+
+// Form Group Animations
+.form-group {
+  animation: fade-in-up 0.6s ease-out;
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+  &:nth-child(4) { animation-delay: 0.4s; }
+}
+
+// Generate Button Enhancement
+.generate-button {
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 10px 40px rgba(59, 130, 246, 0.3);
+  }
+  
+  &:active {
+    transform: translateY(0) scale(1);
+  }
+  
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(255, 255, 255, 0.2),
+      transparent
+    );
+    transition: left 0.5s;
+  }
+  
+  &:hover::before {
+    left: 100%;
+  }
+}
+
+// Results Section Animation
+.results-section {
+  animation: slide-up 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.result-card {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.1);
+  }
+  
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.2s; }
+  &:nth-child(3) { animation-delay: 0.3s; }
+}
+
+// Copy Button Effects
+.copy-button, .copy-button-small {
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: scale(1.1) rotate(5deg);
+  }
+  
+  &:active {
+    transform: scale(0.95) rotate(-5deg);
+  }
+  
+  &.copied {
+    animation: success-pulse 0.4s ease-out;
+  }
+}
+
+// Command Examples Enhancement
+.command-example {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  
+  &:hover {
+    transform: translateX(5px);
+    background: rgba(59, 130, 246, 0.05);
+    border-radius: 8px;
+    padding: 8px;
+    margin: -8px;
+  }
+}
+
+// AI Suggestion Cards Enhancement
+.suggestion-card {
+  animation: magical-entrance 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    background: linear-gradient(45deg, transparent 30%, rgba(255, 255, 255, 0.1) 50%, transparent 70%);
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  
+  &:hover::before {
+    opacity: 1;
+  }
+}
+
+// Keyframe Animations
+@keyframes glow-drift {
+  0%, 100% {
+    transform: translateX(0px) translateY(0px) scale(1);
+    opacity: 0.4;
+  }
+  25% {
+    transform: translateX(30px) translateY(-20px) scale(1.1);
+    opacity: 0.6;
+  }
+  50% {
+    transform: translateX(-20px) translateY(-30px) scale(0.9);
+    opacity: 0.3;
+  }
+  75% {
+    transform: translateX(-30px) translateY(15px) scale(1.05);
+    opacity: 0.5;
+  }
+}
+
+@keyframes fade-in-up {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slide-up {
+  0% {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes success-pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+    box-shadow: 0 0 20px rgba(16, 185, 129, 0.4);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes magical-entrance {
+  0% {
+    opacity: 0;
+    transform: translateY(-20px) scale(0.9) rotate(-1deg);
+    filter: blur(2px);
+  }
+  50% {
+    opacity: 0.8;
+    transform: translateY(-5px) scale(1.02) rotate(0.5deg);
+    filter: blur(1px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1) rotate(0deg);
+    filter: blur(0px);
+  }
+}
+
+// Dark Mode Adjustments
+:host-context(.dark) {
+  .form-glow {
+    &.glow-1 {
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, transparent 70%);
+    }
+    
+    &.glow-2 {
+      background: radial-gradient(circle, rgba(34, 197, 94, 0.1) 0%, transparent 70%);
+    }
+    
+    &.glow-3 {
+      background: radial-gradient(circle, rgba(168, 85, 247, 0.12) 0%, transparent 70%);
+    }
+  }
+  
+  .form-input:focus, .form-textarea:focus, .form-select:focus {
+    box-shadow: 0 4px 20px rgba(139, 92, 246, 0.2);
+  }
+  
+  .generate-button:hover {
+    box-shadow: 0 10px 40px rgba(139, 92, 246, 0.3);
+  }
+}
+
+// Responsive Enhancements
+@media (max-width: 768px) {
+  .form-glow {
+    &.glow-1, &.glow-2, &.glow-3 {
+      width: 100px;
+      height: 100px;
+    }
+  }
+  
+  .generate-button:hover {
+    transform: scale(1.01);
+  }
+  
+  .result-card:hover {
+    transform: translateY(-2px) scale(1.01);
+  }
+}
