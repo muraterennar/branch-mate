@@ -21,7 +21,6 @@
 <h2>✨ Features</h2>
 
 - 🤖 **AI-Powered Generation**: Uses Google Gemini 2.0 Flash for intelligent suggestions
-- 🌍 **Multi-Language Support**: Works with Turkish and English input
 - 🎯 **Professional Standards**: Follows GitHub best practices for naming
 - 🎨 **Beautiful UI**: Modern design with smooth animations
 - 📱 **Responsive Design**: Works perfectly on all devices
