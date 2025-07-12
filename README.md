@@ -10,7 +10,7 @@
   <img src="https://img.shields.io/badge/Angular-19-red?style=for-the-badge&logo=angular" alt="Angular 19">
   <img src="https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript" alt="TypeScript">
   <img src="https://img.shields.io/badge/TailwindCSS-3.0-38B2AC?style=for-the-badge&logo=tailwind-css" alt="TailwindCSS">
-  <img src="https://img.shields.io/badge/.NET_Core-8.0-512BD4?style=for-the-badge&logo=dotnet" alt=".NET Core">
+  <img src="https://img.shields.io/badge/.NET_Core-9.0-512BD4?style=for-the-badge&logo=dotnet" alt=".NET Core">
   <img src="https://img.shields.io/badge/Gemini-2.0_Flash-4285F4?style=for-the-badge&logo=google" alt="Gemini AI">
 </p>
 
@@ -21,10 +21,8 @@
 <h2>✨ Features</h2>
 
 - 🤖 **AI-Powered Generation**: Uses Google Gemini 2.0 Flash for intelligent suggestions
-- 🌍 **Multi-Language Support**: Works with Turkish and English input
 - 🎯 **Professional Standards**: Follows GitHub best practices for naming
 - 🎨 **Beautiful UI**: Modern design with smooth animations
-- 🔒 **Secure Backend**: API keys safely handled via backend proxy
 - 📱 **Responsive Design**: Works perfectly on all devices
 - ⚡ **Real-time Generation**: Instant AI-powered suggestions
 - 🌙 **Dark Mode**: Eye-friendly dark theme support
