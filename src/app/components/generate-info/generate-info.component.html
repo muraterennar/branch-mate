@@ -1,19 +1,34 @@
 <!-- Modern Form Container -->
-<div class="w-full max-w-4xl mx-auto px-4">
+<div class="w-full max-w-4xl mx-auto px-4 relative">
+
+    <!-- Background Glow Effects -->
+    <div class="absolute inset-0 pointer-events-none overflow-hidden">
+        <div class="form-glow glow-1"></div>
+        <div class="form-glow glow-2"></div>
+        <div class="form-glow glow-3"></div>
+    </div>
+
     <!-- Header Section -->
-    <div class="text-center mb-12">
-        <h1 class="source-code-pro-style text-4xl font-bold text-dark-primary dark:text-white mb-4">
+    <div class="text-center mb-12 relative z-10">
+        <h1
+            class="source-code-pro-style text-4xl font-bold text-dark-primary dark:text-white mb-4 animate-in slide-in-from-top duration-700">
             Git Branch Generator
         </h1>
-        <p class="text-lg text-gray-600 dark:text-gray-300">
+        <p class="text-lg text-gray-600 dark:text-gray-300 animate-in slide-in-from-top duration-700 delay-200">
             Generate standardized branch names, commit messages, and PR titles
         </p>
     </div>
 
     <!-- Form Card -->
     <div
-        class="bg-surface dark:bg-dark-surface rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8 backdrop-blur-sm">
-        <form [formGroup]="form" class="space-y-6" (ngSubmit)="submitForm()">
+        class="bg-surface dark:bg-dark-surface rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-700 p-8 backdrop-blur-sm relative z-10 animate-in slide-in-from-bottom duration-700 delay-300 hover:shadow-3xl transition-shadow">
+
+        <!-- Card Glow Effect -->
+        <div
+            class="absolute inset-0 rounded-2xl bg-gradient-to-r from-blue-500/5 via-purple-500/5 to-green-500/5 opacity-0 hover:opacity-100 transition-opacity duration-500 pointer-events-none">
+        </div>
+
+        <form [formGroup]="form" class="space-y-6 relative z-10" (ngSubmit)="submitForm()">
 
             <!-- Grid Layout for Form Fields -->
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
@@ -139,14 +154,37 @@
 
                 <!-- Branch Name Field -->
                 <div class="form-group">
-                    <label class="form-label">
-                        <i class="ri-code-s-slash-line mr-2"></i>
-                        Branch Name
-                    </label>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="form-label mb-0">
+                            <i class="ri-code-s-slash-line mr-2"></i>
+                            Branch Name
+                        </label>
+                        <app-ai [currentValue]="form.get('branchName')?.value || ''" fieldType="branch"
+                            (branchNameGenerated)="onBranchNameGenerated($event)" class="flex-shrink-0">
+                        </app-ai>
+                    </div>
                     <div class="relative">
                         <input type="text" class="form-input peer" [ngClass]="getFieldErrorClass('branchName')"
                             formControlName="branchName" placeholder="e.g., user authentication system" />
                         <div class="form-input-border"></div>
+                    </div>
+                    <!-- AI Response Display -->
+                    <div *ngIf="aiGeneratedBranchName"
+                        class="mt-2 p-3 bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg transform transition-all duration-500 ease-out animate-in slide-in-from-top-2 fade-in">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <div class="flex items-center space-x-2 min-w-0 flex-1">
+                                <i
+                                    class="ri-magic-line text-blue-600 dark:text-blue-400 flex-shrink-0 animate-bounce"></i>
+                                <span class="text-sm font-medium text-blue-800 dark:text-blue-300 flex-shrink-0">AI
+                                    Generated:</span>
+                                <code
+                                    class="text-sm text-blue-900 dark:text-blue-100 bg-blue-100 dark:bg-blue-800/50 px-2 py-1 rounded truncate animate-in slide-in-from-left-2 duration-700">{{ aiGeneratedBranchName }}</code>
+                            </div>
+                            <button type="button" (click)="useBranchNameSuggestion()"
+                                class="text-xs bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition-all duration-300 flex-shrink-0 transform hover:scale-105 hover:shadow-lg animate-in slide-in-from-right-2">
+                                Use This
+                            </button>
+                        </div>
                     </div>
                     @if (form.get('branchName')?.invalid && (form.get('branchName')?.dirty || isSubmitted)) {
                     <div class="form-error">
@@ -158,15 +196,38 @@
 
                 <!-- Commit Message Field -->
                 <div class="form-group">
-                    <label class="form-label">
-                        <i class="ri-message-2-line mr-2"></i>
-                        Commit Message
-                    </label>
+                    <div class="flex items-center justify-between mb-2">
+                        <label class="form-label mb-0">
+                            <i class="ri-message-2-line mr-2"></i>
+                            Commit Message
+                        </label>
+                        <app-ai [currentValue]="form.get('commitMessage')?.value || ''" fieldType="commit"
+                            (branchNameGenerated)="onCommitMessageGenerated($event)" class="flex-shrink-0">
+                        </app-ai>
+                    </div>
                     <div class="relative">
                         <textarea class="form-textarea peer" [ngClass]="getFieldErrorClass('commitMessage')"
                             formControlName="commitMessage" placeholder="Describe what this commit does..."
                             rows="3"></textarea>
                         <div class="form-input-border"></div>
+                    </div>
+                    <!-- AI Response Display -->
+                    <div *ngIf="aiGeneratedCommitMessage"
+                        class="mt-2 p-3 bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg transform transition-all duration-500 ease-out animate-in slide-in-from-top-2 fade-in">
+                        <div class="flex items-center justify-between flex-wrap gap-2">
+                            <div class="flex items-center space-x-2 min-w-0 flex-1">
+                                <i
+                                    class="ri-magic-line text-green-600 dark:text-green-400 flex-shrink-0 animate-bounce"></i>
+                                <span class="text-sm font-medium text-green-800 dark:text-green-300 flex-shrink-0">AI
+                                    Generated:</span>
+                                <code
+                                    class="text-sm text-green-900 dark:text-green-100 bg-green-100 dark:bg-green-800/50 px-2 py-1 rounded truncate animate-in slide-in-from-left-2 duration-700">{{ aiGeneratedCommitMessage }}</code>
+                            </div>
+                            <button type="button" (click)="useCommitMessageSuggestion()"
+                                class="text-xs bg-green-600 text-white px-3 py-1 rounded hover:bg-green-700 transition-all duration-300 flex-shrink-0 transform hover:scale-105 hover:shadow-lg animate-in slide-in-from-right-2">
+                                Use This
+                            </button>
+                        </div>
                     </div>
                     <div class="flex justify-between items-center mt-1">
                         @if (form.get('commitMessage')?.invalid && (form.get('commitMessage')?.dirty || isSubmitted)) {

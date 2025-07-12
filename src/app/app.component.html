@@ -1,21 +1,73 @@
-<div class="flex flex-col justify-center items-center gap-6 p-4 bg-transparent overscroll-hidden relative">
-  <div class="flex justify-end items-center gap-4 mb-8 w-full z-40">
-    <span class="source-code-pro-style text-gray-300/90 dark:text-gray-300/40"><b>v{{ version }}</b></span>
-    <button type="button" class="px-3.5 py-2.5 border border-dark-primary dark:border-background rounded-full"
+<div
+  class="flex flex-col justify-center items-center gap-6 p-4 bg-transparent overscroll-hidden relative overflow-hidden">
+
+  <!-- Animated Background Elements -->
+  <div class="absolute inset-0 overflow-hidden pointer-events-none">
+    <!-- Floating Particles -->
+    <div class="floating-particles">
+      <div class="particle particle-1"></div>
+      <div class="particle particle-2"></div>
+      <div class="particle particle-3"></div>
+      <div class="particle particle-4"></div>
+      <div class="particle particle-5"></div>
+      <div class="particle particle-6"></div>
+      <div class="particle particle-7"></div>
+      <div class="particle particle-8"></div>
+    </div>
+
+    <!-- Gradient Orbs -->
+    <div class="gradient-orbs">
+      <div class="orb orb-1"></div>
+      <div class="orb orb-2"></div>
+      <div class="orb orb-3"></div>
+    </div>
+
+    <!-- Grid Pattern -->
+    <div class="grid-pattern"></div>
+
+    <!-- Animated Lines -->
+    <div class="animated-lines">
+      <div class="line line-1"></div>
+      <div class="line line-2"></div>
+      <div class="line line-3"></div>
+    </div>
+  </div>
+
+  <!-- Header -->
+  <div class="flex justify-end items-center gap-4 mb-8 w-full z-40 relative">
+    <span class="source-code-pro-style text-gray-300/90 dark:text-gray-300/40 animate-pulse"><b>v{{ version
+        }}</b></span>
+    <button type="button"
+      class="px-3.5 py-2.5 border border-dark-primary dark:border-background rounded-full transition-all duration-300 hover:scale-110 hover:shadow-lg backdrop-blur-sm bg-white/10 dark:bg-black/10"
       (click)="toggleTheme()">
       <i [class]="
-          darkModeIcon + ' text-2xl text-dark-primary dark:text-background'
+          darkModeIcon + ' text-2xl text-dark-primary dark:text-background transition-transform duration-300 hover:rotate-180'
         "></i>
     </button>
   </div>
 
+  <!-- Large Background Text with Enhanced Effects -->
   <div class="absolute top-0 left-0 w-full min-h-screen flex justify-center items-center z-0 overflow-hidden">
-    <h1 class="source-code-pro-style text-gray-300/40 dark:text-gray-300/10 text-[500px]">
-      Branch
-    </h1>
+    <div class="relative">
+      <!-- Main text with gradient and glow -->
+      <h1
+        class="source-code-pro-style text-transparent bg-clip-text bg-gradient-to-br from-gray-300/40 via-gray-300/20 to-gray-300/10 dark:from-gray-300/20 dark:via-gray-300/10 dark:to-gray-300/5 text-[500px] animate-pulse-slow select-none">
+        Branch
+      </h1>
+
+      <!-- Glowing outline -->
+      <h1
+        class="source-code-pro-style text-gray-300/5 dark:text-gray-300/3 text-[500px] absolute top-0 left-0 animate-glow select-none">
+        Branch
+      </h1>
+
+      <!-- Shimmer effect -->
+      <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent animate-shimmer"></div>
+    </div>
   </div>
 
-  <div class="w-full z-50">
+  <!-- Content -->
+  <div class="w-full z-50 relative">
     <router-outlet></router-outlet>
   </div>
 

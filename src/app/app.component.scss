@@ -1,0 +1,390 @@
+html,
+body {
+  scroll-behavior: smooth !important;
+  overflow: hidden;
+}
+
+// Animated Background Effects
+.floating-particles {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .particle {
+    position: absolute;
+    background: radial-gradient(
+      circle,
+      rgba(59, 130, 246, 0.3) 0%,
+      transparent 70%
+    );
+    border-radius: 50%;
+    animation: float 15s infinite linear;
+
+    &.particle-1 {
+      width: 4px;
+      height: 4px;
+      top: 20%;
+      left: 10%;
+      animation-delay: 0s;
+      animation-duration: 20s;
+    }
+
+    &.particle-2 {
+      width: 6px;
+      height: 6px;
+      top: 60%;
+      left: 80%;
+      animation-delay: -5s;
+      animation-duration: 25s;
+    }
+
+    &.particle-3 {
+      width: 3px;
+      height: 3px;
+      top: 80%;
+      left: 20%;
+      animation-delay: -10s;
+      animation-duration: 18s;
+    }
+
+    &.particle-4 {
+      width: 5px;
+      height: 5px;
+      top: 30%;
+      left: 70%;
+      animation-delay: -15s;
+      animation-duration: 22s;
+    }
+
+    &.particle-5 {
+      width: 4px;
+      height: 4px;
+      top: 90%;
+      left: 50%;
+      animation-delay: -8s;
+      animation-duration: 16s;
+    }
+
+    &.particle-6 {
+      width: 7px;
+      height: 7px;
+      top: 15%;
+      left: 90%;
+      animation-delay: -12s;
+      animation-duration: 24s;
+    }
+
+    &.particle-7 {
+      width: 3px;
+      height: 3px;
+      top: 70%;
+      left: 15%;
+      animation-delay: -6s;
+      animation-duration: 19s;
+    }
+
+    &.particle-8 {
+      width: 5px;
+      height: 5px;
+      top: 40%;
+      left: 40%;
+      animation-delay: -3s;
+      animation-duration: 21s;
+    }
+  }
+}
+
+// Gradient Orbs
+.gradient-orbs {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(40px);
+    opacity: 0.6;
+    animation: drift 20s infinite ease-in-out;
+
+    &.orb-1 {
+      width: 300px;
+      height: 300px;
+      background: radial-gradient(
+        circle,
+        rgba(59, 130, 246, 0.2) 0%,
+        transparent 70%
+      );
+      top: 10%;
+      left: 10%;
+      animation-delay: 0s;
+    }
+
+    &.orb-2 {
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(
+        circle,
+        rgba(16, 185, 129, 0.15) 0%,
+        transparent 70%
+      );
+      top: 60%;
+      right: 10%;
+      animation-delay: -7s;
+    }
+
+    &.orb-3 {
+      width: 250px;
+      height: 250px;
+      background: radial-gradient(
+        circle,
+        rgba(139, 92, 246, 0.1) 0%,
+        transparent 70%
+      );
+      bottom: 20%;
+      left: 30%;
+      animation-delay: -14s;
+    }
+  }
+}
+
+// Grid Pattern
+.grid-pattern {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-image: linear-gradient(
+      rgba(59, 130, 246, 0.05) 1px,
+      transparent 1px
+    ),
+    linear-gradient(90deg, rgba(59, 130, 246, 0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  animation: grid-move 30s linear infinite;
+  opacity: 0.3;
+}
+
+// Animated Lines
+.animated-lines {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  .line {
+    position: absolute;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba(59, 130, 246, 0.2),
+      transparent
+    );
+
+    &.line-1 {
+      width: 100%;
+      height: 1px;
+      top: 25%;
+      animation: slide-horizontal 8s infinite linear;
+    }
+
+    &.line-2 {
+      width: 1px;
+      height: 100%;
+      left: 75%;
+      animation: slide-vertical 10s infinite linear;
+      background: linear-gradient(
+        0deg,
+        transparent,
+        rgba(16, 185, 129, 0.2),
+        transparent
+      );
+    }
+
+    &.line-3 {
+      width: 100%;
+      height: 1px;
+      bottom: 30%;
+      animation: slide-horizontal-reverse 12s infinite linear;
+      background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(139, 92, 246, 0.2),
+        transparent
+      );
+    }
+  }
+}
+
+// Custom Animations
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px) translateX(0px) rotate(0deg);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(-20px) translateX(10px) rotate(90deg);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-10px) translateX(-15px) rotate(180deg);
+    opacity: 0.6;
+  }
+  75% {
+    transform: translateY(-30px) translateX(5px) rotate(270deg);
+    opacity: 0.9;
+  }
+}
+
+@keyframes drift {
+  0%,
+  100% {
+    transform: translateX(0px) translateY(0px) scale(1);
+  }
+  25% {
+    transform: translateX(50px) translateY(-30px) scale(1.1);
+  }
+  50% {
+    transform: translateX(-30px) translateY(-50px) scale(0.9);
+  }
+  75% {
+    transform: translateX(-50px) translateY(20px) scale(1.05);
+  }
+}
+
+@keyframes grid-move {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(50px, 50px);
+  }
+}
+
+@keyframes slide-horizontal {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-horizontal-reverse {
+  0% {
+    transform: translateX(100vw);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+@keyframes slide-vertical {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+}
+
+@keyframes animate-pulse-slow {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes animate-glow {
+  0%,
+  100% {
+    text-shadow: 0 0 5px rgba(59, 130, 246, 0.1);
+  }
+  50% {
+    text-shadow: 0 0 20px rgba(59, 130, 246, 0.2),
+      0 0 30px rgba(59, 130, 246, 0.1);
+  }
+}
+
+@keyframes animate-shimmer {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+// Utility Classes
+.animate-pulse-slow {
+  animation: animate-pulse-slow 4s ease-in-out infinite;
+}
+
+.animate-glow {
+  animation: animate-glow 6s ease-in-out infinite;
+}
+
+.animate-shimmer {
+  animation: animate-shimmer 8s ease-in-out infinite;
+}
+
+// Dark mode enhancements
+:host-context(.dark) {
+  .floating-particles .particle {
+    background: radial-gradient(
+      circle,
+      rgba(139, 92, 246, 0.2) 0%,
+      transparent 70%
+    );
+  }
+
+  .gradient-orbs {
+    .orb-1 {
+      background: radial-gradient(
+        circle,
+        rgba(99, 102, 241, 0.15) 0%,
+        transparent 70%
+      );
+    }
+
+    .orb-2 {
+      background: radial-gradient(
+        circle,
+        rgba(34, 197, 94, 0.1) 0%,
+        transparent 70%
+      );
+    }
+
+    .orb-3 {
+      background: radial-gradient(
+        circle,
+        rgba(168, 85, 247, 0.08) 0%,
+        transparent 70%
+      );
+    }
+  }
+
+  .grid-pattern {
+    background-image: linear-gradient(
+        rgba(139, 92, 246, 0.03) 1px,
+        transparent 1px
+      ),
+      linear-gradient(90deg, rgba(139, 92, 246, 0.03) 1px, transparent 1px);
+  }
+}

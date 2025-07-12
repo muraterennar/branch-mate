@@ -42,3 +42,9 @@ testem.log
 .DS_Store
 Thumbs.db
 /.vscode/
+
+# Environment files with API keys
+/src/environments/environment.local.ts
+/src/environments/*.local.ts
+.env
+.env.local
