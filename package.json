@@ -6,8 +6,9 @@
     "start": "ng serve --configuration development",
     "start:local": "ng serve --configuration local",
     "start:production": "ng serve --configuration production",
-    "start:development" : "ng serve --configuration development",
-    "build": "ng build",
+    "start:development": "ng serve --configuration development",
+    "prebuild": "node set-env.js",
+    "build": "ng build --configuration production",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
