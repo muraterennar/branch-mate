@@ -24,7 +24,6 @@
 - 🌍 **Multi-Language Support**: Works with Turkish and English input
 - 🎯 **Professional Standards**: Follows GitHub best practices for naming
 - 🎨 **Beautiful UI**: Modern design with smooth animations
-- 🔒 **Secure Backend**: API keys safely handled via backend proxy
 - 📱 **Responsive Design**: Works perfectly on all devices
 - ⚡ **Real-time Generation**: Instant AI-powered suggestions
 - 🌙 **Dark Mode**: Eye-friendly dark theme support
