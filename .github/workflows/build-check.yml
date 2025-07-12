@@ -38,6 +38,15 @@ jobs:
           git status
           git diff --stat
 
+          echo "Changed .env files:"
+          git diff --name-only | grep '\.env' || echo "No .env files changed"
+          git status --short | grep '\.env' || echo "No .env files changed (status)"
+          for file in $(git diff --name-only | grep '\.env'); do
+            echo "---- $file ----"
+            cat "$file"
+            echo ""
+          done
+
       - name: 🏗️ Build Angular project
         run: |
           echo "Building Angular project for production..."
