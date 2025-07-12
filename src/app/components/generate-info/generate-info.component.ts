@@ -9,10 +9,11 @@ import {
 import { BranchTypes } from '../../datas/branch-types';
 import { BranchData } from '../../core/models/branch-data';
 import { GitService } from '../../core/services/git.service';
+import { AiComponent } from '../../core/components/ai/ai.component';
 
 @Component({
   selector: 'app-generate-info',
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, AiComponent],
   templateUrl: './generate-info.component.html',
   styleUrl: './generate-info.component.scss',
 })
@@ -29,6 +30,10 @@ export class GenerateInfoComponent {
   loadingRepos: boolean = false;
   showRepoSuggestions: boolean = false;
   copiedStates: { [key: string]: boolean } = {};
+
+  // AI generated suggestions
+  aiGeneratedBranchName: string = '';
+  aiGeneratedCommitMessage: string = '';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -246,5 +251,35 @@ export class GenerateInfoComponent {
       default:
         return branchType;
     }
+  }
+
+  onBranchNameGenerated(generatedName: string) {
+    // AI'dan gelen branch name'i suggestion olarak sakla
+    this.aiGeneratedBranchName = generatedName;
+  }
+
+  onCommitMessageGenerated(generatedMessage: string) {
+    // AI'dan gelen commit message'ı suggestion olarak sakla
+    this.aiGeneratedCommitMessage = generatedMessage;
+  }
+
+  useBranchNameSuggestion() {
+    // AI suggestion'ını form'a uygula ve smooth animasyon ile suggestion'ı temizle
+    this.form.patchValue({ branchName: this.aiGeneratedBranchName });
+    
+    // Kısa bir gecikme ile suggestion'ı temizle (animasyon için)
+    setTimeout(() => {
+      this.aiGeneratedBranchName = '';
+    }, 300);
+  }
+
+  useCommitMessageSuggestion() {
+    // AI suggestion'ını form'a uygula ve smooth animasyon ile suggestion'ı temizle
+    this.form.patchValue({ commitMessage: this.aiGeneratedCommitMessage });
+    
+    // Kısa bir gecikme ile suggestion'ı temizle (animasyon için)
+    setTimeout(() => {
+      this.aiGeneratedCommitMessage = '';
+    }, 300);
   }
 }
